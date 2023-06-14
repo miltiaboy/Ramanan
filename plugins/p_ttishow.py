@@ -40,7 +40,7 @@ async def save_group(bot, message):
         InlineKeyboardButton('➕ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true') ] ,
      [
         InlineKeyboardButton('ᴀʙᴏᴜᴛ', callback_data='about'),
-        InlineKeyboardButton('ᴄʟᴏsᴇ', callback_data='close')
+        InlineKeyboardButton('ᴄʟᴏsᴇ', callback_data='close_data')
     ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_text(
