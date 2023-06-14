@@ -222,7 +222,7 @@ async def start(client, message):
         file_id=file_id,
         caption=f_caption,
         reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton("⚡ ᴜᴘᴅᴀᴛᴇꜱ ⚡", url=f"{UPDATES_CHANNEL}"),
-                                               InlineKeyboardButton("⚡ ɢʀᴏᴜᴘ ⚡", url="https://t.me/+FTt3LaNOvYk1ZWY1q") ],
+                                               InlineKeyboardButton("⚡ ɢʀᴏᴜᴘ ⚡", url="https://t.me/+FTt3LaNOvYk1ZWY1") ],
                                              [ InlineKeyboardButton('🔎 Sᴇᴀʀᴄʜ Iɴʟɪɴᴇ 🔍', switch_inline_query_current_chat = '') ] ] ),
         protect_content=True if pre == 'filep' else False,
         )
