@@ -7,11 +7,13 @@ CMD = ["/", "."]
 
 @Client.on_message(filters.private)
 async def grp(client, message):
-    buttons = [[
-            InlineKeyboardButton("🔍 𝖯𝗋𝗈𝖲𝖾𝖺𝗋𝖼𝗁 𝖥𝖺𝗍𝗁𝖾𝗋 🔎", url='http://t.me/ProsearchFatherbot?start=help'),
-            InlineKeyboardButton("🔎 Join Movie Search Group 🔍", url='https://t.me/+t-HcJA8ged9kNjI1')
-            ]]
-    
+        buttons = [
+        [
+            InlineKeyboardButton("𝖯𝗋𝗈𝖲𝖾𝖺𝗋𝖼𝗁 𝖥𝖺𝗍𝗁𝖾𝗋", url='http://t.me/ProsearchFatherbot?start=help'),
+            InlineKeyboardButton("Movie Search Group", url='https://t.me/+t-HcJA8ged9kNjI1')
+        ]
+    ]
+
     reply_markup = InlineKeyboardMarkup(buttons)
     
     await message.reply_photo(
