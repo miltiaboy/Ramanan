@@ -6,7 +6,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQ
 CMD = ["/", "."]
 @Client.on_message(filters.private)
 async def grp(client, message):
-buttons = [[InlineKeyboardButton("🍭 𝗣𝗿𝗼𝗦𝗲𝗮𝗿𝗰𝗵𝗙𝗮𝘁𝗵𝗲𝗿 𝗕𝗼𝘁 🍭 ", url='http://t.me/ProsearchFatherbot?start=help')],[InlineKeyboardButton("🍳 𝗠𝗼𝘃𝗶𝗲𝘀 & 𝗦𝗲𝗿𝗶𝗲𝘀 𝗦𝗲𝗮𝗿𝗰𝗵 𝗚𝗿𝗼𝘂𝗽 🍳", url='https://t.me/+t-HcJA8ged9kNjI1')],[InlineKeyboardButton("🎬 𝗠𝗼𝘃𝗶𝗲𝘀 & 𝗦𝗲𝗿𝗶𝗲𝘀 𝗨𝗽𝗱𝗮𝘁𝗲𝘀 🚀 ", url='http://t.me/ProsearchFatherbot?start=help')]]
+buttons = [[InlineKeyboardButton("🍭 𝗣𝗿𝗼𝗦𝗲𝗮𝗿𝗰𝗵𝗙𝗮𝘁𝗵𝗲𝗿 𝗕𝗼𝘁 🍭", url='http://t.me/ProsearchFatherbot?start=help')],[InlineKeyboardButton("🍳 𝗠𝗼𝘃𝗶𝗲𝘀 & 𝗦𝗲𝗿𝗶𝗲𝘀 𝗦𝗲𝗮𝗿𝗰𝗵 𝗚𝗿𝗼𝘂𝗽 🍳", url='https://t.me/+t-HcJA8ged9kNjI1')],[InlineKeyboardButton("🎬 𝗠𝗼𝘃𝗶𝗲𝘀 & 𝗦𝗲𝗿𝗶𝗲𝘀 𝗨𝗽𝗱𝗮𝘁𝗲𝘀 🚀", url='http://t.me/ProsearchFatherbot?start=help')]]
 reply_markup = InlineKeyboardMarkup(buttons)
 await message.reply_photo(
         photo="http://graph.org/file/36a684f0c26c766870f7c.jpg",
