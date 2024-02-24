@@ -11,9 +11,9 @@ async def grp(client, message):
 	await message.reply_photo(
 		photo="http://graph.org/file/36a684f0c26c766870f7c.jpg",
 		caption = "<b> ⚠️ Oops!\n\nYou Can't Use Me for Searching Files from Private, I can only Work in Groups Now.\n\nUse @ProSearchFatherBot for Searching Files easily from private chat.\n\n Team @ProSearchFather !</b>",
-        reply_markup=reply_markup,
-        parse_mode=enums.ParseMode.HTML,
-        reply_to_message_id=message.id)
+		reply_markup=reply_markup,
+		parse_mode=enums.ParseMode.HTML,
+		reply_to_message_id=message.id)
         
 @Client.on_message(filters.command("ping", CMD))
 async def ping(_, message):
