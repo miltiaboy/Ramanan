@@ -9,3 +9,4 @@ bs4
 imdbpy==2021.4.18
 aiohttp
 python-dotenv
+git+https://github.com/agronholm/anyio
