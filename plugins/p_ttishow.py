@@ -3,7 +3,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors.exceptions.bad_request_400 import MessageTooLong, PeerIdInvalid
 from info import ADMINS, LOG_CHANNEL, SUPPORT_CHAT, MELCOW_NEW_USERS
 from database.users_chats_db import db
-from database.ia_filterdb import Media
+from database.ia_filterdb import Media1, Media2, db1 as clientDB1, db2 as clientDB2
 from utils import get_size, temp, get_settings
 from Script import script
 from pyrogram.errors import ChatAdminRequired
@@ -142,17 +142,18 @@ async def re_enable_chat(bot, message):
 @Client.on_message(filters.command('stats')  & filters.incoming & filters.user(ADMINS))
 async def get_ststs(bot, message):
     rju = await message.reply('Fetching stats..')
-    total_users = await db.total_users_count()
-    totl_chats = await db.total_chat_count()
-    files = await Media.count_documents()
-    size = await db.get_db_size()
-    free = 536870912 - size
-    size = get_size(size)
-    free = get_size(free)
-    await rju.edit(script.STATUS_TXT.format(files, total_users, totl_chats, size, free))
+    tot1 = await Media1.count_documents()
+    tot2 = await Media2.count_documents()
+    total = tot1 + tot2
+    users = await db.total_users_count()
+    chats = await db.total_chat_count()
+    stats1 = await clientDB1.command('dbStats')
+    used_dbSize1 = (stats1['dataSize']/(1024*1024))+(stats1['indexSize']/(1024*1024))
+    stats2 = await clientDB2.command('dbStats')
+    used_dbSize2 = (stats2['dataSize']/(1024*1024))+(stats2['indexSize']/(1024*1024)) 
+    await rju.edit(script.STATUS_TXT.format(total, users, chats, tot1, round(used_dbSize1, 2), tot2, round(used_dbSize2, 2)))
 
 
-# a function for trespassing into others groups, Inspired by a Vazha
 # Not to be used , But Just to showcase his vazhatharam.
 @Client.on_message(filters.command('invite') & filters.user(ADMINS))
 async def gen_invite(bot, message):
