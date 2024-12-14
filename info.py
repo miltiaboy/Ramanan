@@ -33,8 +33,11 @@ auth_grp = environ.get('AUTH_GROUP')
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 
 # MongoDB information
-DATABASE_URI1 = environ.get('DATABASE_URI1', "")
+DATABASE_URI = environ.get('DATABASE_URI1', "")
 DATABASE_URI2 = environ.get('DATABASE_URI2', "")
+DATABASE_URI3 = environ.get('DATABASE_URI3', "")
+DATABASE_URI4 = environ.get('DATABASE_URI2', "")
+DATABASE_URI5 = environ.get('DATABASE_URI2', "")
 DATABASE_NAME = environ.get('DATABASE_NAME', "KC")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Files')
 
