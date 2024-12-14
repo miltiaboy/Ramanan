@@ -38,8 +38,8 @@ DATABASE_URI2 = environ.get('DATABASE_URI2', "")
 DATABASE_URI3 = environ.get('DATABASE_URI3', "")
 DATABASE_URI4 = environ.get('DATABASE_URI2', "")
 DATABASE_URI5 = environ.get('DATABASE_URI2', "")
-DATABASE_NAME = environ.get('DATABASE_NAME', "KC")
-COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Files')
+DATABASE_NAME = environ.get('DATABASE_NAME', "")
+COLLECTION_NAME = environ.get('COLLECTION_NAME', '')
 
 # FSUB
 auth_channel = environ.get('AUTH_CHANNEL')
