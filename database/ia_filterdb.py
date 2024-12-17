@@ -306,14 +306,22 @@ async def get_search_results(query, file_type=None, max_results=10, offset=0, fi
 
 async def get_file_details(query):
     filter = {'file_id': query}
-    cursor_media1 = Media1.find(filter)
-    filedetails_media1 = await cursor_media1.to_list(length=1)
-    if filedetails_media1:
-        return filedetails_media1
-    cursor_media2 = Media2.find(filter)
+    cursor = Media2.find(filter)
+    filedetails = await cursor.to_list(length=1)
+    if filedetails:
+        return filedetails
+    cursor_media2 = Media3.find(filter)
     filedetails_media2 = await cursor_media2.to_list(length=1)
     if filedetails_media2:
         return filedetails_media2
+    cursor_media3 = Media4.find(filter)
+    filedetails_media3 = await cursor_media3.to_list(length=1)
+    if filedetails_media3:
+        return filedetails_media3
+    cursor_media4 = Media5.find(filter)
+    filedetails_media4 = await cursor_media4.to_list(length=1)
+    if filedetails_media4:
+        return filedetails_media4
 
 def encode_file_id(s: bytes) -> str:
     r = b""
