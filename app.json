@@ -54,7 +54,7 @@
             "description": "ID of channel.Make sure bot is admin in this channel. Without subscribing this channel users cannot use bot.",
             "required": false
         },
-        "DATABASE_URI1": {
+        "USERS_DB": {
             "description": "mongoDB URI. Get this value from https://www.mongodb.com. For more help watch this video - https://youtu.be/dsuTn4qV2GA",
             "required": true
         },
