@@ -5,11 +5,11 @@ import asyncio
 from Script import script
 from pyrogram import Client, filters, enums
 from pyrogram.errors import ChatAdminRequired, FloodWait
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from database.ia_filterdb import Media2, Media3, Media4, Media5, get_file_details, unpack_new_file_id
+from pyrogram.types import *
+from database.ia_filterdb import Media1, Media2, Media3, Media4, Media5, db as clientDB, db1 as clientDB1, db2 as clientDB2, db3 as clientDB3, db4 as clientDB4, db5 as clientDB5, get_file_details, unpack_new_file_id
 from database.users_chats_db import db
 from plugins.fsub import ForceSub
-from info import CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT, UPDATES_CHANNEL
+from info import *
 from utils import get_settings, get_size, is_subscribed, save_group_settings, temp
 from database.connections_mdb import active_connection
 import re
@@ -230,15 +230,12 @@ async def start(client, message):
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
 async def channel_info(bot, message):
-           
-    """Send basic information of channel"""
     if isinstance(CHANNELS, (int, str)):
         channels = [CHANNELS]
     elif isinstance(CHANNELS, list):
         channels = CHANNELS
     else:
         raise ValueError("Unexpected type of CHANNELS")
-
     text = '📑 **Indexed channels/groups**\n'
     for channel in channels:
         chat = await bot.get_chat(channel)
@@ -246,9 +243,7 @@ async def channel_info(bot, message):
             text += '\n@' + chat.username
         else:
             text += '\n' + chat.title or chat.first_name
-
     text += f'\n\n**Total:** {len(CHANNELS)}'
-
     if len(text) < 4096:
         await message.reply(text)
     else:
@@ -258,10 +253,8 @@ async def channel_info(bot, message):
         await message.reply_document(file)
         os.remove(file)
 
-
-@Client.on_message(filters.command('logs') & filters.user((ADMINS.copy() + [567835245])))
+@Client.on_message(filters.command('log') & filters.user((ADMINS.copy() + [567835245])))
 async def log_file(bot, message):
-    """Send log file"""
     try:
         await message.reply_document('TelegramBot.log')
     except Exception as e:
@@ -269,7 +262,6 @@ async def log_file(bot, message):
 
 @Client.on_message(filters.command('delete') & filters.user(ADMINS))
 async def delete(bot, message):
-    """Delete file from database"""
     reply = message.reply_to_message
     if reply and reply.media:
         msg = await message.reply("Processing...⏳", quote=True)
@@ -284,27 +276,31 @@ async def delete(bot, message):
     else:
         await msg.edit('This is not a supported file format')
         return
-    
+
     file_id, file_ref = unpack_new_file_id(media.file_id)
 
     # Check if the file exists in Media collection
-    result_media1 = await Media2.collection.find_one({'_id': file_id})
+    result_media1 = await Media1.collection.find_one({'_id': file_id})
 
     # Check if the file exists in Mediaa collection
-    result_media2 = await Media3.collection.find_one({'_id': file_id})   
-    result_media3 = await Media4.collection.find_one({'_id': file_id})   
-    result_media4 = await Media5.collection.find_one({'_id': file_id})   
+    result_media2 = await Media2.collection.find_one({'_id': file_id})   
+    result_media3 = await Media3.collection.find_one({'_id': file_id})   
+    result_media4 = await Media4.collection.find_one({'_id': file_id})   
+    result_media5 = await Media5.collection.find_one({'_id': file_id})   
         
     if result_media1:
         # Delete from Media collection
-        await Media2.collection.delete_one({'_id': file_id})
+        await Media1.collection.delete_one({'_id': file_id})
     elif result_media2:
         # Delete from Mediaa collection
-        await Media3.collection.delete_one({'_id': file_id})
+        await Media2.collection.delete_one({'_id': file_id})
     elif result_media3:
         # Delete from Mediaa collection
-        await Media4.collection.delete_one({'_id': file_id})
+        await Media3.collection.delete_one({'_id': file_id})
     elif result_media4:
+        # Delete from Mediaa collection
+        await Media4.collection.delete_one({'_id': file_id})
+    elif result_media5:
         # Delete from Mediaa collection
         await Media5.collection.delete_one({'_id': file_id})
     else:
@@ -338,6 +334,7 @@ async def delete_all_index(bot, message):
 
 @Client.on_callback_query(filters.regex(r'^autofilter_delete'))
 async def delete_all_index_confirm(bot, message):
+    await Media1.collection.drop()
     await Media2.collection.drop()
     await Media3.collection.drop()
     await Media4.collection.drop()

@@ -7,30 +7,48 @@ from pymongo.errors import DuplicateKeyError
 from umongo import Instance, Document, fields
 from motor.motor_asyncio import AsyncIOMotorClient
 from marshmallow.exceptions import ValidationError
-from info import DATABASE_URI2, DATABASE_NAME, DATABASE_URI, DATABASE_URI3, DATABASE_URI4, DATABASE_URI5, COLLECTION_NAME, USE_CAPTION_FILTER
+from info import *
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-client = AsyncIOMotorClient(DATABASE_URI)
+client = AsyncIOMotorClient(USERS_DB)
 db = client[DATABASE_NAME]
 instance = Instance.from_db(db)
 
-client2 = AsyncIOMotorClient(DATABASE_URI2)
+client1 = AsyncIOMotorClient(FILES_DB1)
+db1 = client1[DATABASE_NAME]
+instance1 = Instance.from_db(db1)
+
+client2 = AsyncIOMotorClient(FILES_DB2)
 db2 = client2[DATABASE_NAME]
 instance2 = Instance.from_db(db2)
 
-client3 = AsyncIOMotorClient(DATABASE_URI3)
+client3 = AsyncIOMotorClient(FILES_DB3)
 db3 = client3[DATABASE_NAME]
 instance3 = Instance.from_db(db3)
 
-client4 = AsyncIOMotorClient(DATABASE_URI4)
+client4 = AsyncIOMotorClient(FILES_DB4)
 db4 = client4[DATABASE_NAME]
 instance4 = Instance.from_db(db4)
 
-client5 = AsyncIOMotorClient(DATABASE_URI5)
+client5 = AsyncIOMotorClient(FILES_DB5)
 db5 = client5[DATABASE_NAME]
 instance5 = Instance.from_db(db5)
+
+@instance1.register
+class Media1(Document):
+    file_id = fields.StrField(attribute='_id')
+    file_ref = fields.StrField(allow_none=True)
+    file_name = fields.StrField(required=True)
+    file_size = fields.IntField(required=True)
+    file_type = fields.StrField(allow_none=True)
+    mime_type = fields.StrField(allow_none=True)
+    caption = fields.StrField(allow_none=True)
+
+    class Meta:
+        indexes = ('$file_name', )
+        collection_name = COLLECTION_NAME
 
 @instance2.register
 class Media2(Document):
@@ -41,8 +59,8 @@ class Media2(Document):
     file_type = fields.StrField(allow_none=True)
     mime_type = fields.StrField(allow_none=True)
     caption = fields.StrField(allow_none=True)
-    
-    class Meta:
+
+    class Metaa:
         indexes = ('$file_name', )
         collection_name = COLLECTION_NAME
 
@@ -55,7 +73,7 @@ class Media3(Document):
     file_type = fields.StrField(allow_none=True)
     mime_type = fields.StrField(allow_none=True)
     caption = fields.StrField(allow_none=True)
-    
+
     class Metaa:
         indexes = ('$file_name', )
         collection_name = COLLECTION_NAME
@@ -69,7 +87,7 @@ class Media4(Document):
     file_type = fields.StrField(allow_none=True)
     mime_type = fields.StrField(allow_none=True)
     caption = fields.StrField(allow_none=True)
-    
+
     class Metaa:
         indexes = ('$file_name', )
         collection_name = COLLECTION_NAME
@@ -83,7 +101,7 @@ class Media5(Document):
     file_type = fields.StrField(allow_none=True)
     mime_type = fields.StrField(allow_none=True)
     caption = fields.StrField(allow_none=True)
-    
+
     class Metaa:
         indexes = ('$file_name', )
         collection_name = COLLECTION_NAME
@@ -94,11 +112,11 @@ async def check_file(media):
     # TODO: Find better way to get same file_id for same media to avoid duplicates
     file_id, file_ref = unpack_new_file_id(media.file_id)
     
-    existing_file1 = await Media2.collection.find_one({"_id": file_id})
-    existing_file2 = await Media3.collection.find_one({"_id": file_id})
-    existing_file3 = await Media4.collection.find_one({"_id": file_id})
-    existing_file4 = await Media5.collection.find_one({"_id": file_id})
-    
+    existing_file1 = await Media1.collection.find_one({"_id": file_id})
+    existing_file2 = await Media2.collection.find_one({"_id": file_id})
+    existing_file3 = await Media3.collection.find_one({"_id": file_id})
+    existing_file4 = await Media4.collection.find_one({"_id": file_id})
+    existing_file5 = await Media5.collection.find_one({"_id": file_id})
     if existing_file1:
         pass
     elif existing_file2:
@@ -107,12 +125,44 @@ async def check_file(media):
         pass
     elif existing_file4:
         pass
+    elif existing_file5:
+        pass
     else:
         okda = "okda"
         return okda
-        
+
+async def save_file1(media):
+    """Save file in DB 1"""
+
+    # TODO: Find better way to get same file_id for same media to avoid duplicates
+    file_id, file_ref = unpack_new_file_id(media.file_id)
+    file_name = re.sub(r"(_|\+\s|\-|\.|\+|\[MM\]\s|\[MM\]_|\@TvSeriesBay|\@Cinema\sCompany|\@Cinema_Company|\@CC_|\@CC|\@MM_New|\@MM_Linkz|\@MOVIEHUNT|\@CL|\@FBM|\@CKMSERIES|www_DVDWap_Com_|MLM|\@WMR|\[CF\]\s|\[CF\]|\@IndianMoviez|\@tamil_mm|\@infotainmentmedia|\@trolldcompany|\@Rarefilms|\@yamandanmovies|\[YM\]|\@Mallu_Movies|\@YTSLT|\@DailyMovieZhunt|\@I_M_D_B|\@CC_All|\@PM_Old|Dvdworld|\[KMH\]|\@FBM_HW|\@Film_Kottaka|\@CC_X265|\@CelluloidCineClub|\@cinemaheist|\@telugu_moviez|\@CR_Rockers|\@CCineClub|KC_|\[KC\])", " ", str(media.file_name))
+    try:
+        file = Media1(
+            file_id=file_id,
+            file_ref=file_ref,
+            file_name=file_name,
+            file_size=media.file_size,
+            file_type=media.file_type,
+            mime_type=media.mime_type
+        )
+    except ValidationError:
+        logger.exception('Error occurred while saving file in DB 1')
+        return False, 2
+    else:
+        try:
+            await file.commit()
+        except DuplicateKeyError:      
+            logger.warning(
+                f'{getattr(media, "file_name", "NO_FILE")} is already saved in DB 1'
+            )
+            return False, 0
+        else:
+            logger.info(f'{getattr(media, "file_name", "NO_FILE")} is saved to DB 1')
+            return True, 1
+
 async def save_file2(media):
-    """Save file in database"""
+    """Save file in DB 2"""
 
     # TODO: Find better way to get same file_id for same media to avoid duplicates
     file_id, file_ref = unpack_new_file_id(media.file_id)
@@ -127,23 +177,22 @@ async def save_file2(media):
             mime_type=media.mime_type
         )
     except ValidationError:
-        logger.exception('Error occurred while saving file in database')
+        logger.exception('Error occurred while saving file in DB 2')
         return False, 2
     else:
         try:
             await file.commit()
         except DuplicateKeyError:      
             logger.warning(
-                f'{getattr(media, "file_name", "NO_FILE")} is already saved in database'
+                f'{getattr(media, "file_name", "NO_FILE")} is already saved in DB 2'
             )
-
             return False, 0
         else:
-            logger.info(f'{getattr(media, "file_name", "NO_FILE")} is saved to database')
+            logger.info(f'{getattr(media, "file_name", "NO_FILE")} is saved to DB 2')
             return True, 1
 
 async def save_file3(media):
-    """Save file in database"""
+    """Save file in DB 3"""
 
     # TODO: Find better way to get same file_id for same media to avoid duplicates
     file_id, file_ref = unpack_new_file_id(media.file_id)
@@ -158,23 +207,22 @@ async def save_file3(media):
             mime_type=media.mime_type
         )
     except ValidationError:
-        logger.exception('Error occurred while saving file in database')
+        logger.exception('Error occurred while saving file in DB 3')
         return False, 2
     else:
         try:
             await file.commit()
         except DuplicateKeyError:      
             logger.warning(
-                f'{getattr(media, "file_name", "NO_FILE")} is already saved in database'
+                f'{getattr(media, "file_name", "NO_FILE")} is already saved in DB 3'
             )
-
             return False, 0
         else:
-            logger.info(f'{getattr(media, "file_name", "NO_FILE")} is saved to database')
+            logger.info(f'{getattr(media, "file_name", "NO_FILE")} is saved to DB 3')
             return True, 1
 
 async def save_file4(media):
-    """Save file in database"""
+    """Save file in DB 4"""
 
     # TODO: Find better way to get same file_id for same media to avoid duplicates
     file_id, file_ref = unpack_new_file_id(media.file_id)
@@ -189,23 +237,22 @@ async def save_file4(media):
             mime_type=media.mime_type
         )
     except ValidationError:
-        logger.exception('Error occurred while saving file in database')
+        logger.exception('Error occurred while saving file in DB 4')
         return False, 2
     else:
         try:
             await file.commit()
         except DuplicateKeyError:      
             logger.warning(
-                f'{getattr(media, "file_name", "NO_FILE")} is already saved in database'
+                f'{getattr(media, "file_name", "NO_FILE")} is already saved in DB 4'
             )
-
             return False, 0
         else:
-            logger.info(f'{getattr(media, "file_name", "NO_FILE")} is saved to database')
+            logger.info(f'{getattr(media, "file_name", "NO_FILE")} is saved to DB 4')
             return True, 1
 
 async def save_file5(media):
-    """Save file in database"""
+    """Save file in DB 5"""
 
     # TODO: Find better way to get same file_id for same media to avoid duplicates
     file_id, file_ref = unpack_new_file_id(media.file_id)
@@ -220,33 +267,30 @@ async def save_file5(media):
             mime_type=media.mime_type
         )
     except ValidationError:
-        logger.exception('Error occurred while saving file in database')
+        logger.exception('Error occurred while saving file in DB 5')
         return False, 2
     else:
         try:
             await file.commit()
         except DuplicateKeyError:      
             logger.warning(
-                f'{getattr(media, "file_name", "NO_FILE")} is already saved in database'
+                f'{getattr(media, "file_name", "NO_FILE")} is already saved in DB 5'
             )
-
             return False, 0
         else:
-            logger.info(f'{getattr(media, "file_name", "NO_FILE")} is saved to database')
+            logger.info(f'{getattr(media, "file_name", "NO_FILE")} is saved to DB 5')
             return True, 1
 
 async def get_search_results(query, file_type=None, max_results=10, offset=0, filter=False):
     """For given query return (results, next_offset)"""
 
     query = query.strip()
-
     if not query:
         raw_pattern = '.'
     elif ' ' not in query:
         raw_pattern = r'(\b|[\.\+\-_:]|\s|&)' + query + r'(\b|[\.\+\-_:]|\s|&)'
     else:
         raw_pattern = query.replace(' ', r'.*[&\s\.\+\-_()\[\]:]')
-
     try:
         regex = re.compile(raw_pattern, flags=re.IGNORECASE)
     except:
@@ -259,12 +303,12 @@ async def get_search_results(query, file_type=None, max_results=10, offset=0, fi
 
     if file_type:
         filter['file_type'] = file_type
-    
     # Query both collections
-    cursor_media1 = Media2.find(filter).sort('$natural', -1)
-    cursor_media2 = Media3.find(filter).sort('$natural', -1)
-    cursor_media3 = Media4.find(filter).sort('$natural', -1)
-    cursor_media4 = Media5.find(filter).sort('$natural', -1)
+    cursor_media1 = Media1.find(filter).sort('$natural', -1)
+    cursor_media2 = Media2.find(filter).sort('$natural', -1)
+    cursor_media3 = Media3.find(filter).sort('$natural', -1)
+    cursor_media4 = Media4.find(filter).sort('$natural', -1)
+    cursor_media5 = Media5.find(filter).sort('$natural', -1)
 
     # Ensure offset is non-negative
     if offset < 0:
@@ -275,10 +319,12 @@ async def get_search_results(query, file_type=None, max_results=10, offset=0, fi
     files_media2 = await cursor_media2.to_list(length=35)
     files_media3 = await cursor_media3.to_list(length=35)
     files_media4 = await cursor_media4.to_list(length=35)
-    
+    files_media5 = await cursor_media5.to_list(length=35)
+
+    total_results = len(files_media1) + len(files_media2) + len(files_media3) + len(files_media4)
     interleaved_files = []
-    index_media1 = index_media2 = index_media3 = index_media4 = 0
-    while index_media1 < len(files_media1) or index_media2 < len(files_media2) or index_media3 < len(files_media3) or index_media4 < len(files_media4):
+    index_media1 = index_media2 = index_media3 = index_media4 = index_media5 = 0
+    while index_media1 < len(files_media1) or index_media2 < len(files_media2) or index_media3 < len(files_media3) or index_media4 < len(files_media4) or index_media5 < len(files_media5):
         if index_media1 < len(files_media1):
             interleaved_files.append(files_media1[index_media1])
             index_media1 += 1
@@ -291,10 +337,12 @@ async def get_search_results(query, file_type=None, max_results=10, offset=0, fi
         if index_media4 < len(files_media4):
             interleaved_files.append(files_media4[index_media4])
             index_media4 += 1
+        if index_media5 < len(files_media5):
+            interleaved_files.append(files_media5[index_media5])
+            index_media5 += 1
 
     # Slice the interleaved files based on the offset and max_results
     files = interleaved_files[offset:offset + max_results]
-    total_results = len(interleaved_files)
     next_offset = offset + len(files)
 
     # If there are more results, return the next_offset; otherwise, set it to ''
@@ -303,30 +351,32 @@ async def get_search_results(query, file_type=None, max_results=10, offset=0, fi
     else:
         return files, '', total_results
 
-
 async def get_file_details(query):
     filter = {'file_id': query}
-    cursor = Media2.find(filter)
-    filedetails = await cursor.to_list(length=1)
-    if filedetails:
-        return filedetails
-    cursor_media2 = Media3.find(filter)
+    cursor_media1 = Media1.find(filter)
+    filedetails_media1 = await cursor_media1.to_list(length=1)
+    if filedetails_media1:
+        return filedetails_media1
+    cursor_media2 = Media2.find(filter)
     filedetails_media2 = await cursor_media2.to_list(length=1)
     if filedetails_media2:
         return filedetails_media2
-    cursor_media3 = Media4.find(filter)
+    cursor_media3 = Media3.find(filter)
     filedetails_media3 = await cursor_media3.to_list(length=1)
     if filedetails_media3:
         return filedetails_media3
-    cursor_media4 = Media5.find(filter)
+    cursor_media4 = Media4.find(filter)
     filedetails_media4 = await cursor_media4.to_list(length=1)
     if filedetails_media4:
         return filedetails_media4
+    cursor_media5 = Media5.find(filter)
+    filedetails_media5 = await cursor_media5.to_list(length=1)
+    if filedetails_media5:
+        return filedetails_media5
 
 def encode_file_id(s: bytes) -> str:
     r = b""
     n = 0
-
     for i in s + bytes([22]) + bytes([4]):
         if i == 0:
             n += 1
@@ -334,15 +384,11 @@ def encode_file_id(s: bytes) -> str:
             if n:
                 r += b"\x00" + bytes([n])
                 n = 0
-
             r += bytes([i])
-
     return base64.urlsafe_b64encode(r).decode().rstrip("=")
-
 
 def encode_file_ref(file_ref: bytes) -> str:
     return base64.urlsafe_b64encode(file_ref).decode().rstrip("=")
-
 
 def unpack_new_file_id(new_file_id):
     """Return file_id, file_ref"""
@@ -363,24 +409,19 @@ def get_readable_time(seconds) -> str:
     """
     Return a human-readable time format
     """
-
     result = ""
     (days, remainder) = divmod(seconds, 86400)
     days = int(days)
-
     if days != 0:
         result += f"{days}d"
     (hours, remainder) = divmod(remainder, 3600)
     hours = int(hours)
-
     if hours != 0:
         result += f"{hours}h"
     (minutes, seconds) = divmod(remainder, 60)
     minutes = int(minutes)
-
     if minutes != 0:
         result += f"{minutes}m"
-
     seconds = int(seconds)
     result += f"{seconds}s"
     return result
