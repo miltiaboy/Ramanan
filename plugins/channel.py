@@ -15,7 +15,6 @@ async def media(bot, message):
 
     media.file_type = file_type
     media.caption = message.caption
-    ok = await match_file(message.caption)
     
     if message.id % 4 == 0:
         tru = await check_file(media)
