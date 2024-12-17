@@ -2,7 +2,7 @@ import os, pytz, re, datetime, logging, asyncio, math, time
 from pyrogram import Client, filters, enums
 from pyrogram.errors import FloodWait
 from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid, ChatAdminRequired, UsernameInvalid, UsernameNotModified
-from info import ADMINS, LOG_CHANNEL
+from info import *
 from database.ia_filterdb import save_file1, save_file2, save_file3, save_file4, save_file5, check_file, get_readable_time
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from utils import temp
