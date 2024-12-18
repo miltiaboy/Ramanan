@@ -144,7 +144,8 @@ async def save_file1(media):
             file_name=file_name,
             file_size=media.file_size,
             file_type=media.file_type,
-            mime_type=media.mime_type
+            mime_type=media.mime_type,
+            caption=media.caption.html if media.caption else None
         )
     except ValidationError:
         logger.exception('Error occurred while saving file in DB 1')
@@ -174,7 +175,8 @@ async def save_file2(media):
             file_name=file_name,
             file_size=media.file_size,
             file_type=media.file_type,
-            mime_type=media.mime_type
+            mime_type=media.mime_type,
+            caption=media.caption.html if media.caption else None
         )
     except ValidationError:
         logger.exception('Error occurred while saving file in DB 2')
@@ -204,7 +206,8 @@ async def save_file3(media):
             file_name=file_name,
             file_size=media.file_size,
             file_type=media.file_type,
-            mime_type=media.mime_type
+            mime_type=media.mime_type,
+            caption=media.caption.html if media.caption else None
         )
     except ValidationError:
         logger.exception('Error occurred while saving file in DB 3')
@@ -234,7 +237,8 @@ async def save_file4(media):
             file_name=file_name,
             file_size=media.file_size,
             file_type=media.file_type,
-            mime_type=media.mime_type
+            mime_type=media.mime_type,
+            caption=media.caption.html if media.caption else None
         )
     except ValidationError:
         logger.exception('Error occurred while saving file in DB 4')
@@ -264,7 +268,8 @@ async def save_file5(media):
             file_name=file_name,
             file_size=media.file_size,
             file_type=media.file_type,
-            mime_type=media.mime_type
+            mime_type=media.mime_type,
+            caption=media.caption.html if media.caption else None
         )
     except ValidationError:
         logger.exception('Error occurred while saving file in DB 5')
