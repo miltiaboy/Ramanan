@@ -49,7 +49,7 @@ AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_chan
 REQ_CHANNEL = environ.get("REQ_CHANNEL", False)
 REQ_CHANNEL = int(REQ_CHANNEL) if REQ_CHANNEL and id_pattern.search(REQ_CHANNEL) else False
 JOIN_REQS_DB = environ.get("JOIN_REQS_DB", USERS_DB)
-
+NORES_CHANNEL = environ.get("NORES_CHANNEL", '-1002330019766')
 # Others
 LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1002306644446'))
 SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'PowerOfTG')
