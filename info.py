@@ -36,7 +36,7 @@ AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 USERS_DB = environ.get('USERS_DB', "mongodb+srv://Tesbot:Tesbot@cluster0.c5fduff.mongodb.net/?retryWrites=true&w=majority")
 FILES_DB1 = environ.get('FILES_DB1', "")
 FILES_DB2 = environ.get('FILES_DB2', "")
-FILES_DB3 = environ.get('FILES_DB3', "")
+FILES_DB3 = environ.get('FILES_DB3', "mongodb+srv://sree:sree@cluster0.ftfi2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 FILES_DB4 = environ.get('FILES_DB4', "mongodb+srv://jaggu:jaggu@cluster0.hbix5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 FILES_DB5 = environ.get('FILES_DB5', "mongodb+srv://sree:sree@cluster0.vxbpd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME = environ.get('DATABASE_NAME', "ponjikkaramup")
