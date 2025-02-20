@@ -10,7 +10,7 @@ from database.gfilters_mdb import add_gfilter, get_gfilters, delete_gfilter, cou
 from database.connections_mdb import active_connection
 from utils import get_file_id, gfilterparser, split_quotes
 
-@Client.on_message(filters.command(['gfilter', 'addg']) & filters.incoming & filters.user(ADMINS))
+@Client.on_message(filters.command(['add', 'addg']) & filters.incoming & filters.user(ADMINS))
 async def addgfilter(client, message):
     args = message.text.html.split(None, 1)
 
