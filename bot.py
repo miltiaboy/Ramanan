@@ -99,5 +99,6 @@ class Bot(Client):
                 current += 1
 
 
-app = Bot()
-app.run()
+if name == "main":
+    app = Bot()
+    app.run()
