@@ -19,6 +19,7 @@ from aiohttp import web
 from plugins import web_server
 
 PORT = "8080"
+name = "main"
 
 class Bot(Client):
 
