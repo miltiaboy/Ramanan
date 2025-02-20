@@ -15,14 +15,14 @@ def is_enabled(value, default):
 
 # Bot information
 SESSION = environ.get('SESSION', 'Media_search')
-API_ID = int(environ['API_ID'])
-API_HASH = environ['API_HASH']
-BOT_TOKEN = environ['BOT_TOKEN']
+API_ID = int(environ.get('API_ID', '5231149'))
+API_HASH = environ.get('API_HASH', 'd53ef34a7880f18526ebd67651c96d6c')
+BOT_TOKEN = environ.get('BOT_TOKEN', '8050270193:AAEw5NTgOjVt2ZVRlzcXsYwMJwU2yq8shu0')
 
 # Bot settings
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
 USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', True))
-PICS = (environ.get('PICS', 'https://envs.sh/EIP.jpg https://envs.sh/EIb.jpg https://envs.sh/EIe.jpg')).split()
+PICS = (environ.get('PICS', 'https://envs.sh/EIP.jpg')).split()
 
 # Admins, Channels & Users
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '5079242179').split()]
@@ -49,7 +49,7 @@ AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_chan
 REQ_CHANNEL = environ.get("REQ_CHANNEL", False)
 REQ_CHANNEL = int(REQ_CHANNEL) if REQ_CHANNEL and id_pattern.search(REQ_CHANNEL) else False
 JOIN_REQS_DB = environ.get("JOIN_REQS_DB", USERS_DB)
-NORES_CHANNEL = environ.get("NORES_CHANNEL", '-1002330019766')
+NORES_CHANNEL = environ.get("NORES_CHANNEL", '-1002407954898')
 # Others
 LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1002306644446'))
 SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'PowerOfTG')
