@@ -28,6 +28,14 @@ logger.setLevel(logging.ERROR)
 BUTTONS = {}
 SPELL_CHECK = {}
 
+RATING = ["5.1 | IMDB", "6.2 | IMDB", "7.3 | IMDB", "8.4 | IMDB", "9.5 | IMDB", "8.3 | IMDB", "6.3 | IMDB"]
+GENRES = ["fun, fact",
+          "Thriller, Comedy",
+          "Drama, Comedy",
+          "Family, Drama",
+          "Action, Adventure",
+          "Film Noir",
+          "Documentary"]
 
 @Client.on_message(filters.text & (filters.group | filters.private) & filters.incoming & filters.chat(AUTH_GROUPS) if AUTH_GROUPS else filters.text & (filters.group | filters.private) & filters.incoming)
 async def give_filter(client, message):
@@ -75,7 +83,7 @@ async def next_page(bot, query):
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"▪ {get_size(file.file_size)} ▫️ {file.file_name}", callback_data=f'files#{file.file_id}'
+                    text=f"{get_size(file.file_size)} {file.file_name}", callback_data=f'files#{file.file_id}'
                 ),
             ]
             for file in files
@@ -98,14 +106,7 @@ async def next_page(bot, query):
             InlineKeyboardButton(f'🎬 {search} 🎬', 'reqst1')
         ]
     )
-    btn.insert(1,
-        [
-            InlineKeyboardButton(f'📟 Files: {len(files)}', 'dupe'),
-            InlineKeyboardButton(f'🎁 Tips', 'tips'),
-            InlineKeyboardButton(f'📮 Info', 'info')
-        ]
-    )
-
+    
     if 0 < offset <= 10:
         off_set = 0
     elif offset == 0:
@@ -167,10 +168,19 @@ async def advantage_spoll_choker(bot, query):
         if files:
             k = (movie, files, offset, total_results)
             await auto_filter(bot, query, k)
-        else:
-            k = await query.message.edit("<b><i>Movie Not available Reason\n\n1) O.T.T Or DVD Not Released\n\n2) Type Name With Year\n\n3) Movie Is Not Available in the database Report to Admins\n\nReport to Admin By 👇\n@Pro_Searchbot</i></b>")
+        else:            
+            buttons = [[
+            InlineKeyboardButton('🇮🇳 UPDATES 🇮🇳', url='https://t.me/UrvashiTheaters_Main')
+            ]]
+            reply_markup=InlineKeyboardMarkup(buttons)
+            
+            reqstr1 = query.from_user.id if query.from_user else 0
+            reqstr = await bot.get_users(reqstr1)
+            await bot.send_message(chat_id=NORES_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, movie)))
+            k = await query.message.edit("<b><i>Movie Not available Reason\n\n1) O.T.T Or DVD Not Released\n\n2) Type Name With Year\n\n3) Movie Is Not Available in the database Report to Admins\n\nReport to Admin </i></b>")
             await asyncio.sleep(25)
             await k.delete()
+            
 @Client.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
     if query.data == "close_data":
@@ -437,7 +447,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         InlineKeyboardButton('➕ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true') ] ,
      [
         InlineKeyboardButton('ᴀʙᴏᴜᴛ', callback_data='about'),
-        InlineKeyboardButton('ᴄʟᴏsᴇ', callback_data='close_data')
+        InlineKeyboardButton('ꜱᴛᴀᴛᴜꜱ', callback_data='stats')
     ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
@@ -465,8 +475,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
     elif query.data == "about":
         buttons = [[
-        InlineKeyboardButton('ᴜᴘᴅᴀᴛᴇꜱ', url=f"{UPDATES_CHANNEL}"),
-        InlineKeyboardButton('sᴜᴘᴘᴏʀᴛ', url='https://t.me/+R7lZTfsZ4k1mYjU9'),
+        InlineKeyboardButton('ᴜᴘᴅᴀᴛᴇꜱ', url="https://t.me/UrvashiTheaters_Main"),
+        InlineKeyboardButton('sᴜᴘᴘᴏʀᴛ', url='https://t.me/PowerOfTG'),
         InlineKeyboardButton('ʙᴀᴄᴋ', callback_data='start')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
@@ -549,7 +559,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
     elif query.data == "stats":
         buttons = [[
-            InlineKeyboardButton('👩‍🦯 Back', callback_data='help'),
+            InlineKeyboardButton('👩‍🦯 Back', callback_data='start'),
             InlineKeyboardButton('♻️', callback_data='rfrsh')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
@@ -581,7 +591,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
     elif query.data == "rfrsh":
         await query.answer("Fetching MongoDb DataBase")
         buttons = [[
-            InlineKeyboardButton('👩‍🦯 Back', callback_data='help'),
+            InlineKeyboardButton('👩‍🦯 Back', callback_data='start'),
             InlineKeyboardButton('♻️', callback_data='rfrsh')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
@@ -699,7 +709,7 @@ async def auto_filter(client, msg, spoll=False):
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"▪ {get_size(file.file_size)} ▫️ {file.file_name}", callback_data=f'{pre}#{file.file_id}'
+                    text=f"{get_size(file.file_size)} {file.file_name}", callback_data=f'{pre}#{file.file_id}'
                 ),
             ]
             for file in files
@@ -723,14 +733,7 @@ async def auto_filter(client, msg, spoll=False):
             InlineKeyboardButton(f'🎬 {search} 🎬', 'reqst1')
         ]
     )
-    btn.insert(1,
-        [
-            InlineKeyboardButton(f'📟 Files: {total_results}', 'dupe'),
-            InlineKeyboardButton(f'🎁 Tips', 'tips'),
-            InlineKeyboardButton(f'📮 Info', 'info')
-        ]
-    )
-
+    
     if offset != "":
         key = f"{message.chat.id}-{message.id}"
         BUTTONS[key] = search
@@ -780,7 +783,7 @@ async def auto_filter(client, msg, spoll=False):
             **locals()
         )
     else:
-        cap = f"<b>Hai 👋 {message.from_user.mention}</b> 😍\n\n<b>📁 Found ✨  Files For Your Query : #{search} 👇</b>"
+        cap = f"<b><i><blockquote>►Film : {search}\n►Rating : {random.choice(RATING)}\n►Genre : {random.choice(GENRES)}\n►Result : {total_results}</i></blockquote></b>\n\n<b><i>©𝐓𝐞𝐚𝐦 𝐔𝐫𝐯𝐚𝐬𝐡𝐢 𝐓𝐡𝐞𝐚𝐭𝐞𝐫𝐬™️</i></b>"         
     if imdb and imdb.get('poster'):
         try:
             fmsg = await message.reply_photo(photo=imdb.get('poster'), caption=cap[:1024],
@@ -818,6 +821,7 @@ async def advantage_spell_chok(msg):
         button = [[        
         InlineKeyboardButton('🔍 sᴇᴀʀᴄʜ ᴏɴ ɢᴏᴏɢʟᴇ​ 🔎', url=f"https://www.google.com/search?q={reqst_gle}")
         ]]        
+        await client.send_message(chat_id=NORES_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, mv_rqst)))
         k = await msg.reply_text(
             text=("<b>I couldn't find the file you requested 😕\nTry to do the following...\n\n=> Request with correct spelling\n\n=> Don't ask movies that are not released in OTT platforms\n\n=> Try to ask in [MovieName, Language] this format.\n\n=> Use the button below to search on Google 😌</b>"),
             reply_markup=InlineKeyboardMarkup(button),
@@ -833,6 +837,7 @@ async def advantage_spell_chok(msg):
         button = [[        
         InlineKeyboardButton('🔍 sᴇᴀʀᴄʜ ᴏɴ ɢᴏᴏɢʟᴇ​ 🔎', url=f"https://www.google.com/search?q={reqst_gle}")
         ]]
+        await client.send_message(chat_id=NORES_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, mv_rqst)))
         k = await msg.reply_text(
             text=("<b>I couldn't find the file you requested 😕\nTry to do the following...\n\n=> Request with correct spelling\n\n=> Don't ask movies that are not released in OTT platforms\n\n=> Try to ask in [MovieName, Language] this format.\n\n=> Use the button below to search on Google 😌</b>"),
             reply_markup=InlineKeyboardMarkup(button),
