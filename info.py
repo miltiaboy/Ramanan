@@ -34,7 +34,7 @@ AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 
 # MongoDB information
 USERS_DB = environ.get('USERS_DB', "mongodb+srv://Tesbot:Tesbot@cluster0.c5fduff.mongodb.net/?retryWrites=true&w=majority")
-FILES_DB1 = environ.get('FILES_DB1', "")
+FILES_DB1 = environ.get('FILES_DB1', "mongodb+srv://sree:sree@cluster0.2dpl8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 FILES_DB2 = environ.get('FILES_DB2', "")
 FILES_DB3 = environ.get('FILES_DB3', "mongodb+srv://sree:sree@cluster0.ftfi2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 FILES_DB4 = environ.get('FILES_DB4', "mongodb+srv://jaggu:jaggu@cluster0.hbix5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
@@ -51,14 +51,14 @@ REQ_CHANNEL = int(REQ_CHANNEL) if REQ_CHANNEL and id_pattern.search(REQ_CHANNEL)
 JOIN_REQS_DB = environ.get("JOIN_REQS_DB", USERS_DB)
 
 # Others
-LOG_CHANNEL = int(environ.get('LOG_CHANNEL', 0))
-SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'dkbotxchats')
+LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1002306644446'))
+SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'PowerOfTG')
 P_TTI_SHOW_OFF = is_enabled((environ.get('P_TTI_SHOW_OFF', "True")), True)
-IMDB = is_enabled((environ.get('IMDB', "True")), True)
+IMDB = is_enabled((environ.get('IMDB', "False")), True)
 SINGLE_BUTTON = is_enabled((environ.get('SINGLE_BUTTON', "False")), False)
 CUSTOM_FILE_CAPTION = environ.get("CUSTOM_FILE_CAPTION", "<b>{file_caption}\n\nCʜᴀɴɴᴇʟ ➧ <a href= https://t.me/+6guhTe_AHh44ODY1>@ProSearchFather</a></b>")
 BATCH_FILE_CAPTION = environ.get("BATCH_FILE_CAPTION", CUSTOM_FILE_CAPTION)
-UPDATES_CHANNEL = environ.get('UPDATES_CHANNEL', "t.me/JrRip")
+UPDATES_CHANNEL = environ.get('UPDATES_CHANNEL', "t.me/UrvashiTheaters_Main")
 IMDB_TEMPLATE = environ.get("IMDB_TEMPLATE", "<b>Hai 👋 {message.from_user.mention}</b> 😍\n\n<b>📁 Found ✨  Files For Your Query : #{search} 👇</b>")
 LONG_IMDB_DESCRIPTION = is_enabled(environ.get("LONG_IMDB_DESCRIPTION", "False"), False)
 SPELL_CHECK_REPLY = is_enabled(environ.get("SPELL_CHECK_REPLY", "True"), True)
