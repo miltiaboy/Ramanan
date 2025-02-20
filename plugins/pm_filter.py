@@ -57,23 +57,7 @@ async def give_filter(client, message):
 #         text=f"<b>#PSF\n\nNᴀᴍᴇ : {user}\n\nID : {user_id}\n\nMᴇssᴀɢᴇ : {content}</b>"
 #     )
     
-@Client.on_message(filters.private & filters.text & filters.incoming)
-async def pm_text(bot, message):
-    content = message.text
-    user = message.from_user.first_name
-    user_id = message.from_user.id
-    if content.startswith("/") or content.startswith("#"): return  # ignore commands and hashtags
-    await message.reply_text("<b>Your message has been sent to my moderators !</b>",
-                             reply_markup=InlineKeyboardMarkup(
-                                 [[
-                                     InlineKeyboardButton('📍 Mᴏᴠɪᴇ ɪs ʜᴇʀᴇ 📍', url='https://t.me/+JQeou0PAx_Y0ZGFl')
-                                 ]]
-                             )
-                             )
-    await bot.send_message(
-        chat_id=NORES_CHANNEL,
-        text=f"<b>#PM_MSG\n\nName : {user}\n\nID : {user_id}\n\nMessage : {content}</b>"
-    )
+
 
 
 @Client.on_callback_query(filters.regex(r"^next"))
@@ -182,7 +166,7 @@ async def advantage_spoll_choker(bot, query):
         return await query.answer("You are clicking on an old button which is expired.", show_alert=True)
     movie = movies[(int(movie_))]
     await query.answer('Checking for Movie in database...')
-    k = await global_filters(bot, query.message, text=movie)
+    k = await manual_filters(bot, query.message, text=movie)
     if k == False:
         files, offset, total_results = await get_search_results(movie, offset=0, filter=True)
         if files:
