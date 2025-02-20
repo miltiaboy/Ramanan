@@ -9,7 +9,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 
 from database.join_reqs import JoinReqs
 from info import REQ_CHANNEL, AUTH_CHANNEL, JOIN_REQS_DB, ADMINS
-
+from Script import script 
 from logging import getLogger
 
 logger = getLogger(__name__)
@@ -100,7 +100,7 @@ async def ForceSub(bot: Client, update: Message, file_id: str = False, mode="che
 
         buttons = [
             [
-                InlineKeyboardButton("📢 Request to Join Channel 📢", url=invite_link)
+                InlineKeyboardButton("🚸 ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 🚸", url=invite_link)
             ],
             [
                 InlineKeyboardButton(" 🔄 Try Again 🔄 ", callback_data=f"{mode}#{file_id}")
@@ -112,7 +112,7 @@ async def ForceSub(bot: Client, update: Message, file_id: str = False, mode="che
 
         if not is_cb:
             await update.reply(
-                text=text,
+                text=script.SUB_TXT,
                 quote=True,
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=enums.ParseMode.MARKDOWN,
