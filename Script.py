@@ -6,6 +6,12 @@ class script(object):
 
 <b><a href=https://t.me/+JQeou0PAx_Y0ZGFl>©𝐓𝐞𝐚𝐦 𝐔𝐫𝐯𝐚𝐬𝐡𝐢 𝐓𝐡𝐞𝐚𝐭𝐞𝐫𝐬™️</a></b>"""
     
+    SUB_START_TXT = """<i><b><blockquote>ʜᴇʟʟᴏ {}👋,
+ɪ ᴀᴍ <a href=https://t.me/{}>{}</a>,</b>
+</i></blockquote>
+
+©𝐓𝐞𝐚𝐦 @𝐔𝐫𝐯𝐚𝐬𝐡𝐢𝐓𝐡𝐞𝐚𝐭𝐞𝐫𝐬"""
+    
     HELP_TXT = """<i>🙋🏻‍♂️   𝖧𝖾𝗅𝗅𝗈𝗈𝗈  {} 🤓
 ○  𝗂𝗍'𝗌 𝖭𝗈𝗍𝖾 𝖢𝗈𝗆𝗉𝗅𝗂𝖼𝖺𝗍𝖾𝖽...🤓
 ○  𝖲𝖾𝖺𝗋𝖼𝗁 𝗎𝗌𝗂𝗇𝗀 𝗂𝗇𝗅𝗂𝗇𝖾 𝗆𝗈𝖽𝖾...⭐
