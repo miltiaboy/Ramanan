@@ -17,7 +17,7 @@ def is_enabled(value, default):
 SESSION = environ.get('SESSION', 'Media_search')
 API_ID = int(environ.get('API_ID', '5231149'))
 API_HASH = environ.get('API_HASH', 'd53ef34a7880f18526ebd67651c96d6c')
-BOT_TOKEN = environ.get('BOT_TOKEN', '8050270193:AAEw5NTgOjVt2ZVRlzcXsYwMJwU2yq8shu0')
+BOT_TOKEN = environ.get('BOT_TOKEN', '7798063500:AAEQhQI93loX9edOtprD0mWzgYPDdut0AC0')
 
 # Bot settings
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
@@ -33,12 +33,12 @@ auth_grp = environ.get('AUTH_GROUP')
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 
 # MongoDB information
-USERS_DB = environ.get('USERS_DB', "mongodb+srv://Tesbot:Tesbot@cluster0.c5fduff.mongodb.net/?retryWrites=true&w=majority")
-FILES_DB1 = environ.get('FILES_DB1', "mongodb+srv://sree:sree@cluster0.2dpl8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-FILES_DB2 = environ.get('FILES_DB2', "mongodb+srv://sree:sree@cluster0.tetn2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-FILES_DB3 = environ.get('FILES_DB3', "mongodb+srv://sree:sree@cluster0.ftfi2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-FILES_DB4 = environ.get('FILES_DB4', "mongodb+srv://jaggu:jaggu@cluster0.hbix5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-FILES_DB5 = environ.get('FILES_DB5', "mongodb+srv://sree:sree@cluster0.vxbpd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+USERS_DB = environ.get('USERS_DB', "")
+FILES_DB1 = environ.get('FILES_DB1', "")
+FILES_DB2 = environ.get('FILES_DB2', "")
+FILES_DB3 = environ.get('FILES_DB3', "")
+FILES_DB4 = environ.get('FILES_DB4', "")
+FILES_DB5 = environ.get('FILES_DB5', "")
 DATABASE_NAME = environ.get('DATABASE_NAME', "ponjikkaramup")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'ponisir_files')
 
