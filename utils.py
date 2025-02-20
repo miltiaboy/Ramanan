@@ -377,7 +377,6 @@ def gfilterparser(text, keyword):
     except:
         return note_data, buttons, None
 
-
 def parser(text, keyword):
     if "buttonalert" in text:
         text = (text.replace("\n", "\\n").replace("\t", "\\t"))
