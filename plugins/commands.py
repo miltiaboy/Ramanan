@@ -22,12 +22,10 @@ BATCH_FILES = {}
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-        buttons = [[
-        InlineKeyboardButton('➕ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true') ] ,
-     [
-        InlineKeyboardButton('ᴀʙᴏᴜᴛ', callback_data='about'),
-        InlineKeyboardButton('ꜱᴛᴀᴛᴜꜱ', callback_data='stats')
-    ]]
+        buttons = [[          
+            InlineKeyboardButton('ɢʀᴏᴜᴘ', url='https://t.me/+JQeou0PAx_Y0ZGFl'),
+            InlineKeyboardButton('ᴄʜᴀɴɴᴇʟ', url='https://t.me/UrvashiTheaters_Main')
+        ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply(script.START_TXT.format(message.from_user.mention if message.from_user else message.chat.title, temp.U_NAME, temp.B_NAME), reply_markup=reply_markup)
         await asyncio.sleep(2) # 😢 https://github.com/EvamariaTG/EvaMaria/blob/master/plugins/p_ttishow.py#L17 😬 wait a bit, before checking.
@@ -221,13 +219,18 @@ async def start(client, message):
         chat_id=message.from_user.id,
         file_id=file_id,
         caption=f_caption,
-        reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton("⚡ ᴜᴘᴅᴀᴛᴇꜱ ⚡", url=f"{UPDATES_CHANNEL}"),
-                                               InlineKeyboardButton("⚡ ɢʀᴏᴜᴘ ⚡", url="https://t.me/+JQeou0PAx_Y0ZGFl") ],
-                                             [ InlineKeyboardButton('❤️ ᴏᴡɴᴇʀ ❤️', url="https://t.me/PowerOfTG") ] ] ),
         protect_content=True if pre == 'filep' else False,
-        )
-                    
-
+        reply_markup=InlineKeyboardMarkup(
+                          [
+                            [                            
+                            InlineKeyboardButton('ɢʀᴏᴜᴘ', url='https://t.me/+JQeou0PAx_Y0ZGFl'),         
+                            InlineKeyboardButton('ᴄʜᴀɴɴᴇʟ', url='https://t.me/UrvashiTheaters_Main')
+                           ]
+                        ]
+                    )
+    )
+    
+    
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
 async def channel_info(bot, message):
     if isinstance(CHANNELS, (int, str)):
