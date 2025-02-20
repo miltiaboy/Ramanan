@@ -1,5 +1,5 @@
 aiofiles
-aiohttp
+aiohttp==3.7.4
 bs4==0.0.1
 datetime
 git+https://github.com/agronholm/anyio
@@ -8,7 +8,7 @@ marshmallow==3.14.1
 motor==2.5.1
 psutil==5.9.4
 pymongo[srv]==3.12.3
-pyrofork==2.3.43
+pyrofork==2.3.45
 python-dotenv
 pytz
 requests
