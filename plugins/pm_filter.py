@@ -40,21 +40,19 @@ async def give_filter(client, message):
     if k == False:
         await auto_filter(client, message)
 
-# @Client.on_message(filters.private & filters.text & filters.incoming)
-# async def grp_text(bot, message):
-#     content = message.text
-#     user = message.from_user.first_name
-#     user_id = message.from_user.id
-#     if content.startswith("/") or content.startswith("#"): return  # ignore commands and hashtags
-#     if user_id in ADMINS: return # ignore admins
-#     await message.reply_text("<b> ⚠️ Oops!\n\nYou Can't Use Me for Searching Files from Private, I can only Work in Groups Now.\n\nUse @ProSearchFatherBot for Searching Files easily from private chat.\n\n Team @ProSearchFather !</b>")
-#     await bot.send_message(
-#         chat_id=LOG_CHANNEL,
-#         text=f"<b>#PSF\n\nNᴀᴍᴇ : {user}\n\nID : {user_id}\n\nMᴇssᴀɢᴇ : {content}</b>"
-#     )
+  @Client.on_message(filters.private & filters.text & filters.incoming)
+  async def grp_text(bot, message):
+      content = message.text
+      user = message.from_user.first_name
+      user_id = message.from_user.id
+      if content.startswith("/") or content.startswith("#"): return  # ignore commands and hashtags
+      if user_id in ADMINS: return # ignore admins
+      await message.reply_text("<b> ⚠️ Oops!\n\nYou Can't Use Me for Searching Files from Private, I can only Work in Groups Now.\n\n for Searching Files easily from private chat !</b>")
+      await bot.send_message(
+          chat_id=NORES_CHANNEL,
+          text=f"<b>#PSF\n\nNᴀᴍᴇ : {user}\n\nID : {user_id}\n\nMᴇssᴀɢᴇ : {content}</b>"
+      )
     
-
-
 
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
@@ -103,7 +101,7 @@ async def next_page(bot, query):
         ]
     btn.insert(0, 
         [
-            InlineKeyboardButton(f'🎬 {search} 🎬', 'reqst1')
+            InlineKeyboardButton(f'🌿 {search} 🌿', 'reqst1')
         ]
     )
     
@@ -729,7 +727,7 @@ async def auto_filter(client, msg, spoll=False):
         ]
     btn.insert(0, 
         [
-            InlineKeyboardButton(f'🎬 {search} 🎬', 'reqst1')
+            InlineKeyboardButton(f'🌿 {search} 🌿', 'reqst1')
         ]
     )
     
@@ -946,7 +944,7 @@ async def global_filters(client, message, text=False):
                                 disable_web_page_preview=True,
                                 reply_to_message_id=reply_id
                             )
-                            await asyncio.sleep(10)
+                            await asyncio.sleep(900)
                             await knd3.delete()
                             await message.delete()
 
@@ -959,7 +957,7 @@ async def global_filters(client, message, text=False):
                                 reply_markup=InlineKeyboardMarkup(button),
                                 reply_to_message_id=reply_id
                             )
-                            await asyncio.sleep(10)
+                            await asyncio.sleep(900)
                             await knd2.delete()
                             await message.delete()
 
@@ -970,7 +968,7 @@ async def global_filters(client, message, text=False):
                             caption=reply_text or "",
                             reply_to_message_id=reply_id
                         )
-                        await asyncio.sleep(10)
+                        await asyncio.sleep(900)
                         await knd1.delete()
                         await message.delete()
 
@@ -982,7 +980,7 @@ async def global_filters(client, message, text=False):
                             reply_markup=InlineKeyboardMarkup(button),
                             reply_to_message_id=reply_id
                         )
-                        await asyncio.sleep(10)
+                        await asyncio.sleep(900)
                         await knd.delete()
                         await message.delete()
 
