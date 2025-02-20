@@ -26,7 +26,7 @@ async def start(client, message):
         InlineKeyboardButton('➕ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true') ] ,
      [
         InlineKeyboardButton('ᴀʙᴏᴜᴛ', callback_data='about'),
-        InlineKeyboardButton('ᴄʟᴏsᴇ', callback_data='close_data')
+        InlineKeyboardButton('ꜱᴛᴀᴛᴜꜱ', callback_data='stats')
     ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply(script.START_TXT.format(message.from_user.mention if message.from_user else message.chat.title, temp.U_NAME, temp.B_NAME), reply_markup=reply_markup)
@@ -44,7 +44,7 @@ async def start(client, message):
         InlineKeyboardButton('➕ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true') ] ,
      [
         InlineKeyboardButton('ᴀʙᴏᴜᴛ', callback_data='about'),
-        InlineKeyboardButton('ᴄʟᴏsᴇ', callback_data='close_data')
+        InlineKeyboardButton('ꜱᴛᴀᴛᴜꜱ', callback_data='stats')
     ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
@@ -64,7 +64,7 @@ async def start(client, message):
         InlineKeyboardButton('➕ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true') ] ,
      [
         InlineKeyboardButton('ᴀʙᴏᴜᴛ', callback_data='about'),
-        InlineKeyboardButton('ᴄʟᴏsᴇ', callback_data='close_data')
+        InlineKeyboardButton('ꜱᴛᴀᴛᴜꜱ', callback_data='stats')
     ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
@@ -117,7 +117,7 @@ async def start(client, message):
                     chat_id=message.from_user.id,
                     file_id=msg.get("file_id"),
                     caption=f_caption,
-                    reply_markup=InlineKeyboardMarkup( [ [InlineKeyboardButton("⚡ ᴊᴏɪɴ ɢʀᴏᴜᴘ ⚡", url="https://t.me/+R7lZTfsZ4k1mYjU9") ] ] ),
+                    reply_markup=InlineKeyboardMarkup( [ [InlineKeyboardButton("⚡ ᴊᴏɪɴ ɢʀᴏᴜᴘ ⚡", url="https://t.me/+JQeou0PAx_Y0ZGFl") ] ] ),
                     protect_content=msg.get('protect', False),
                     )
             except FloodWait as e:
@@ -222,8 +222,8 @@ async def start(client, message):
         file_id=file_id,
         caption=f_caption,
         reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton("⚡ ᴜᴘᴅᴀᴛᴇꜱ ⚡", url=f"{UPDATES_CHANNEL}"),
-                                               InlineKeyboardButton("⚡ ɢʀᴏᴜᴘ ⚡", url="https://t.me/+R7lZTfsZ4k1mYjU9") ],
-                                             [ InlineKeyboardButton('🔎 Sᴇᴀʀᴄʜ Iɴʟɪɴᴇ 🔍', switch_inline_query_current_chat = '') ] ] ),
+                                               InlineKeyboardButton("⚡ ɢʀᴏᴜᴘ ⚡", url="https://t.me/+JQeou0PAx_Y0ZGFl") ],
+                                             [ InlineKeyboardButton('❤️ ᴏᴡɴᴇʀ ❤️', url="https://t.me/PowerOfTG") ] ] ),
         protect_content=True if pre == 'filep' else False,
         )
                     
@@ -342,7 +342,7 @@ async def delete_all_index_confirm(bot, message):
     await message.answer('Piracy Is Crime')
     await message.message.edit('Succesfully Deleted All The Indexed Files.')
     
-@Client.on_message(filters.command('settings'))
+@Client.on_message(filters.command('sree'))
 async def settings(client, message):
     userid = message.from_user.id if message.from_user else None
     if not userid:
@@ -456,7 +456,7 @@ async def settings(client, message):
 
 
 
-@Client.on_message(filters.command('set_template'))
+@Client.on_message(filters.command('set_temate'))
 async def save_template(client, message):
     sts = await message.reply("Checking template")
     userid = message.from_user.id if message.from_user else None
