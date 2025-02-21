@@ -850,7 +850,7 @@ async def advantage_spell_chok(client, msg):
         reply_markup=InlineKeyboardMarkup(btn),
         reply_to_message_id=msg.id
     )
-    await asyncio.sleep(90)
+    await asyncio.sleep(60)
     await spell_check_del.delete()
     await msg.delete()
     
@@ -931,7 +931,7 @@ async def global_filters(client, message, text=False):
                                 disable_web_page_preview=True,
                                 reply_to_message_id=reply_id
                             )
-                            await asyncio.sleep(900)
+                            await asyncio.sleep(300)
                             await knd3.delete()
                             await message.delete()
 
@@ -944,7 +944,7 @@ async def global_filters(client, message, text=False):
                                 reply_markup=InlineKeyboardMarkup(button),
                                 reply_to_message_id=reply_id
                             )
-                            await asyncio.sleep(900)
+                            await asyncio.sleep(300)
                             await knd2.delete()
                             await message.delete()
 
@@ -955,7 +955,7 @@ async def global_filters(client, message, text=False):
                             caption=reply_text or "",
                             reply_to_message_id=reply_id
                         )
-                        await asyncio.sleep(900)
+                        await asyncio.sleep(300)
                         await knd1.delete()
                         await message.delete()
 
@@ -967,7 +967,7 @@ async def global_filters(client, message, text=False):
                             reply_markup=InlineKeyboardMarkup(button),
                             reply_to_message_id=reply_id
                         )
-                        await asyncio.sleep(900)
+                        await asyncio.sleep(300)
                         await knd.delete()
                         await message.delete()
 
