@@ -161,7 +161,7 @@ async def advantage_spoll_choker(bot, query):
             
             reqstr1 = query.from_user.id if query.from_user else 0
             reqstr = await bot.get_users(reqstr1)
-            await bot.send_message(chat_id=NORES_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, movie)))
+            await bot.send_message(chat_id=NORES_CHANNEL, text=(script.NORSLTS.format(movie)))
             k = await query.message.edit_text(text=script.MOVREQ_TXT, reply_markup=reply_markup)
             await asyncio.sleep(30)
             await k.delete()
@@ -807,7 +807,7 @@ async def advantage_spell_chok(client, msg):
         button = [[
         InlineKeyboardButton('🔍 sᴇᴀʀᴄʜ ᴏɴ ɢᴏᴏɢʟᴇ 🔎', url=f"https://www.google.com/search?q={reqst_gle}")            
         ]]
-        await client.send_message(chat_id=NORES_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, mv_rqst)))
+        await client.send_message(chat_id=NORES_CHANNEL, text=(script.NORSLTS.format(mv_rqst)))
         k = await msg.reply_text(
             text=("<b><blockquote>▪sᴏʀʀʏ ɴᴏ ꜰɪʟᴇs ᴡᴇʀᴇ ꜰᴏᴜɴᴅ\n\nᴄʜᴇᴄᴋ ʏᴏᴜʀ sᴘᴇʟʟɪɴɢ ɪɴ ɢᴏᴏɢʟᴇ ᴀɴᴅ ᴛʀʏ ᴀɢᴀɪɴ !!</b>\n\n🚸 ʏᴏᴜʀ ʀᴇQᴜᴇꜱᴛ ʜᴀꜱ ʙᴇᴇɴ ꜱᴇɴᴛ ᴛᴏ ᴏᴜʀ ᴍᴏᴅᴇʀᴀᴛᴏʀꜱ ᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ ꜰᴏʀ ᴜᴘʟᴏᴀᴅ ᴏʀ ʀᴇᴘʟᴀʏ</blockquote></b>"),
             reply_markup=InlineKeyboardMarkup(button),
@@ -823,7 +823,7 @@ async def advantage_spell_chok(client, msg):
         button = [[
         InlineKeyboardButton('🔍 sᴇᴀʀᴄʜ ᴏɴ ɢᴏᴏɢʟᴇ 🔎', url=f"https://www.google.com/search?q={reqst_gle}")   
         ]]
-        await client.send_message(chat_id=NORES_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, mv_rqst)))
+        await client.send_message(chat_id=NORES_CHANNEL, text=(script.NORSLTS.format(mv_rqst)))
         k = await msg.reply_text(
             text=(f"<b><blockquote>sᴏʀʀʏ ɴᴏ ꜰɪʟᴇs ᴡᴇʀᴇ ꜰᴏᴜɴᴅ\n\nᴄʜᴇᴄᴋ ʏᴏᴜʀ sᴘᴇʟʟɪɴɢ ɪɴ ɢᴏᴏɢʟᴇ ᴀɴᴅ ᴛʀʏ ᴀɢᴀɪɴ !!</b>\n\n🚸 ʏᴏᴜʀ ʀᴇQᴜᴇꜱᴛ ʜᴀꜱ ʙᴇᴇɴ ꜱᴇɴᴛ ᴛᴏ ᴏᴜʀ ᴍᴏᴅᴇʀᴀᴛᴏʀꜱ ᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ ꜰᴏʀ ᴜᴘʟᴏᴀᴅ ᴏʀ ʀᴇᴘʟᴀʏ</blockquote></b>"),
             reply_markup=InlineKeyboardMarkup(button),
