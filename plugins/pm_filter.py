@@ -568,7 +568,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         stats5 = await clientDB5.command('dbStats')
         used_dbSize5 = (stats5['dataSize']/(1024*1024))+(stats5['indexSize']/(1024*1024)) 
         await query.message.edit_text(
-            text=script.STATUS_TXT.format(total, users, chats, round(used_dbSize, 2), tot1, round(used_dbSize1, 2), tot2, round(used_dbSize2, 2), tot3, round(used_dbSize3, 2), tot4, round(used_dbSize4, 2), tot5, round(used_dbSize5, 2)),
+            text=script.STATUS_TXT.format(total, users, chats, round(used_dbSize, 2), tot1, round(used_dbSize1, 2), tot2, round(used_dbSize2, 2), tot3, round(used_dbSize3, 2), tot4, round(used_dbSize4, 2), round(used_dbSize5, 2)),
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
@@ -600,7 +600,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         stats5 = await clientDB5.command('dbStats')
         used_dbSize5 = (stats5['dataSize']/(1024*1024))+(stats5['indexSize']/(1024*1024)) 
         await query.message.edit_text(
-            text=script.STATUS_TXT.format(total, users, chats, round(used_dbSize, 2), tot1, round(used_dbSize1, 2), tot2, round(used_dbSize2, 2), tot3, round(used_dbSize3, 2), tot4, round(used_dbSize4, 2), tot5, round(used_dbSize5, 2)),
+            text=script.STATUS_TXT.format(total, users, chats, round(used_dbSize, 2), tot1, round(used_dbSize1, 2), tot2, round(used_dbSize2, 2), tot3, round(used_dbSize3, 2), tot4, round(used_dbSize4, 2), round(used_dbSize5, 2)),
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
