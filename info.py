@@ -27,7 +27,7 @@ PICS = (environ.get('PICS', 'https://envs.sh/P6q.jpg')).split()
 
 # Admins, Channels & Users
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '5079242179').split()]
-CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1002323845579 -1002277855109 -1002447911997').split()]
+CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1001639568651').split()]
 auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '5079242179').split()]
 AUTH_USERS = (auth_users + ADMINS) if auth_users else []
 auth_grp = environ.get('AUTH_GROUP')
@@ -35,10 +35,10 @@ AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 
 # MongoDB information
 USERS_DB = environ.get('USERS_DB', "")
-FILES_DB1 = environ.get('FILES_DB1', "")
-FILES_DB2 = environ.get('FILES_DB2', "")
-FILES_DB3 = environ.get('FILES_DB3', "")
-FILES_DB4 = environ.get('FILES_DB4', "")
+FILES_DB1 = environ.get("FILES_DB1", USERS_DB)
+FILES_DB2 = environ.get("FILES_DB2", USERS_DB)
+FILES_DB3 = environ.get("FILES_DB3", USERS_DB)
+FILES_DB4 = environ.get("FILES_DB4", USERS_DB)
 FILES_DB5 = environ.get('FILES_DB5', "")
 DATABASE_NAME = environ.get('DATABASE_NAME', "Urvashikkarans")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Urvashikkaran_Files')
