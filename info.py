@@ -18,16 +18,16 @@ def is_enabled(value, default):
 SESSION = environ.get('SESSION', 'Media_search')
 API_ID = int(environ.get('API_ID', '5231149'))
 API_HASH = environ.get('API_HASH', 'd53ef34a7880f18526ebd67651c96d6c')
-BOT_TOKEN = environ.get('BOT_TOKEN', '7798063500:AAEQhQI93loX9edOtprD0mWzgYPDdut0AC0')
+BOT_TOKEN = environ.get('BOT_TOKEN', '8050270193:AAFYm8i1515oCcJwBDjyBs5ytfs-KVY-sDA')
 
 # Bot settings
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
 USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', True))
-PICS = (environ.get('PICS', 'https://envs.sh/EIP.jpg')).split()
+PICS = (environ.get('PICS', 'https://envs.sh/P6q.jpg')).split()
 
 # Admins, Channels & Users
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '5079242179').split()]
-CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '0').split()]
+CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1002323845579 -1002277855109 -1002447911997').split()]
 auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '5079242179').split()]
 AUTH_USERS = (auth_users + ADMINS) if auth_users else []
 auth_grp = environ.get('AUTH_GROUP')
@@ -40,8 +40,8 @@ FILES_DB2 = environ.get('FILES_DB2', "")
 FILES_DB3 = environ.get('FILES_DB3', "")
 FILES_DB4 = environ.get('FILES_DB4', "")
 FILES_DB5 = environ.get('FILES_DB5', "")
-DATABASE_NAME = environ.get('DATABASE_NAME', "ponjikkaramup")
-COLLECTION_NAME = environ.get('COLLECTION_NAME', 'ponisir_files')
+DATABASE_NAME = environ.get('DATABASE_NAME', "Urvashikkarans")
+COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Urvashikkaran_Files')
 
 # FSUB
 auth_channel = environ.get('AUTH_CHANNEL')
@@ -62,7 +62,7 @@ BATCH_FILE_CAPTION = environ.get("BATCH_FILE_CAPTION", CUSTOM_FILE_CAPTION)
 UPDATES_CHANNEL = environ.get('UPDATES_CHANNEL', "t.me/UrvashiTheaters_Main")
 IMDB_TEMPLATE = environ.get("IMDB_TEMPLATE", "<b>Hai 👋 {message.from_user.mention}</b> 😍\n\n<b>📁 Found ✨  Files For Your Query : #{search} 👇</b>")
 LONG_IMDB_DESCRIPTION = is_enabled(environ.get("LONG_IMDB_DESCRIPTION", "False"), False)
-SPELL_CHECK_REPLY = is_enabled(environ.get("SPELL_CHECK_REPLY", "True"), True)
+SPELL_CHECK_REPLY = is_enabled(environ.get("SPELL_CHECK_REPLY", "False"), False)
 MAX_LIST_ELM = environ.get("MAX_LIST_ELM", None)
 INDEX_REQ_CHANNEL = int(environ.get('INDEX_REQ_CHANNEL', LOG_CHANNEL))
 FILE_STORE_CHANNEL = [int(ch) for ch in (environ.get('FILE_STORE_CHANNEL', '')).split()]
